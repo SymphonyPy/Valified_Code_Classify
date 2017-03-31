@@ -48,9 +48,7 @@ def OtsuThreshold(im, debug=False):
     return g_level, g_sigma
 
 
-if __name__ == "__main__":
-    src_file = "D:\\captcha.png"
-    des_file = "D:\\result.png"
+def OSTU(src_file):
     im = Image.open(src_file).convert("L")
 
     # 大津法找阈值
@@ -60,6 +58,4 @@ if __name__ == "__main__":
 
     # 根据阈值,分割之
     im = im.point(lambda p: p > threshold and 255)
-    im.save(des_file)
-
-    print("DONE: %s--->%s" % (src_file, des_file))
+    return im
