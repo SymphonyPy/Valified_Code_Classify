@@ -29,7 +29,7 @@ def sigma(im, i, debug=False):
     u = (u0 - u1) ** 2
     new_sigma = w0 * w1 * u
     if debug:
-        print("%d:\tw0=%f,w1=%f,new_sigma=%f" % (i, w0, w1, new_sigma))
+         print("%d:\tw0=%f,w1=%f,new_sigma=%f" % (i, w0, w1, new_sigma))
     return new_sigma
 
 
@@ -52,9 +52,9 @@ def OSTU(src_file):
     im = Image.open(src_file).convert("L")
 
     # 大津法找阈值
-    debug = True
+    debug = False
     threshold, max = OtsuThreshold(im, debug)
-    print(threshold, max)
+    # print(threshold, max)
 
     # 根据阈值,分割之
     im = im.point(lambda p: p > threshold and 255)
