@@ -4,8 +4,16 @@ import os
 import psutil
 
 
+def Clear_file(path):
+    for i in os.listdir(path):
+        os.remove(path + "\\" + i)
+
+
 def Crawler(save_address, num):
+    order = 0
     for i in range(0, num):
+        order += 1
+        print("picture " + str(order))
         get_url = "https://www.c5game.com/api/login/captcha.html?refresh=1"
         pic_url = "https://www.c5game.com" + rs.get(get_url).json()["url"]
         pic = rs.get(pic_url).content
@@ -34,5 +42,6 @@ def Verified(save_address):
 
 if __name__ == "__main__":
     path = "D:\Code\Python\Valified_Code_Classify\\raw"
-    Crawler(path, 8)
+    Clear_file(path)
+    Crawler(path, 100)
     Verified(path)
