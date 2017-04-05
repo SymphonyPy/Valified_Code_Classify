@@ -21,7 +21,7 @@ def bias_variable(shape):
 
 # convolution
 def conv2d(x, W):
-    return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='VALID')
+    return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
 
 
 # pooling
@@ -40,14 +40,14 @@ x_image = tf.reshape(x, [-1, 40, 40, 1])
 h_conv1 = tf.nn.relu(conv2d(x_image, w_conv1) + b_conv1)
 h_pool1 = max_pool_2x2(h_conv1)
 # second convolutional layer
-w_conv2 = weight_variable([3, 3, 32, 64])
+w_conv2 = weight_variable([5, 5, 32, 64])
 b_conv2 = bias_variable([64])
 h_conv2 = tf.nn.relu(conv2d(h_pool1, w_conv2) + b_conv2)
 h_pool2 = max_pool_2x2(h_conv2)
 # densely connected layer
-w_fc1 = weight_variable([ 8 * 8 * 64, 1024])
+w_fc1 = weight_variable([10 * 10 * 64, 1024])
 b_fc1 = bias_variable([1024])
-h_pool2_flat = tf.reshape(h_pool2, [-1, 8 * 8 * 64])
+h_pool2_flat = tf.reshape(h_pool2, [-1, 10 * 10 * 64])
 h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, w_fc1) + b_fc1)
 # dropout
 keep_prob = tf.placeholder("float")
@@ -69,7 +69,5 @@ for i in range(20000):
         print(
             "step %d, train accuracy %g" % (i, train_accuracy))
     train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})
-    print(
-        "step %d, train accuracy %g" % (i, train_accuracy))
 print(
     "test accuracy %g" % accuracy.eval(feed_dict={x: data.test_images, y_: data.test_labels, keep_prob: 1.0}))
