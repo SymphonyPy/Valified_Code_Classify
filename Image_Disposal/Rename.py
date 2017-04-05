@@ -18,6 +18,6 @@ for i in list:
     new_path = file + "\\" + str(num) + "_" + Anwser(file + "\\" + i) + ".jpg"
     try:
         os.renames(old_path, new_path)
+        print(i + " --> " + str(num) + "_" + Anwser(file + "\\" + i) + ".jpg")
     except:
         pass
-
