@@ -20,11 +20,14 @@ def Anwser(file):
     return matrix[0]
 
 
-def base(address):
+def base(address, answer=True):
     list = []
     for i in os.listdir(address):
         path = address + "\\" + i
-        list.append((PIC(path), Anwser(path)))
+        if answer:
+            list.append((PIC(path), Anwser(path)))
+        else:
+            list.append((PIC(path)))
     return list
 
 
@@ -46,19 +49,21 @@ class Data(object):
             self.order = (self.order + 1) % self.amount
         return mat_pic, mat_ans
 
-        # def next_batch(self, num):
-        #     list = []
-        #     mat_pic = np.zeros((num, 1600))
-        #     mat_ans = np.zeros((num, 26))
-        #     for i in range(0, num):
-        #         order = random.randint(0, self.amount - 1)
-        #         if order not in list:
-        #             mat_pic[i] = self.train[order][0]
-        #             mat_ans[i] = self.train[order][1]
-        #             list.append(order)
-        #         else:
-        #             i -= 1
-        #     return mat_pic, mat_ans
+
+
+# def next_batch(self, num):
+#     list = []
+#     mat_pic = np.zeros((num, 1600))
+#     mat_ans = np.zeros((num, 26))
+#     for i in range(0, num):
+#         order = random.randint(0, self.amount - 1)
+#         if order not in list:
+#             mat_pic[i] = self.train[order][0]
+#             mat_ans[i] = self.train[order][1]
+#             list.append(order)
+#         else:
+#             i -= 1
+#     return mat_pic, mat_ans
 
 # trainset_path = "D:\Code\Python\Valified_Code_Classify\Dataset\\train_set"
 # testset_path = "D:\Code\Python\Valified_Code_Classify\Dataset\\test_set"
