@@ -26,3 +26,7 @@ for i in range(10000):
         accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
         print(sess.run(accuracy, feed_dict={x: batch_xs, y_: batch_ys}))
 print(sess.run(accuracy, feed_dict={x: data.test_images, y_: data.test_labels}))
+saver = tf.train.Saver()
+model_path = "D:\Code\Python\Valified_Code_Classify\Classified\model.ckpt"
+save_path = saver.save(sess, model_path)
+print("Model saved in file: %s" % save_path)
