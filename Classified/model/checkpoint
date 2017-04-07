@@ -1,0 +1,2 @@
+model_checkpoint_path: "D:\\Code\\Python\\Valified_Code_Classify\\Classified\\model.ckpt"
+all_model_checkpoint_paths: "D:\\Code\\Python\\Valified_Code_Classify\\Classified\\model.ckpt"
