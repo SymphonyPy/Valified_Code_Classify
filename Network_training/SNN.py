@@ -14,7 +14,11 @@ y_ = tf.placeholder("float", [None, 26])
 cross_entropy = -tf.reduce_sum(y_ * tf.log(y))
 train_step = tf.train.GradientDescentOptimizer(0.0001).minimize(cross_entropy)
 sess = tf.Session()
-init = tf.initialize_all_variables()
+if(tf.__version__.startswith("0.") and int(tf.__version__.split(".")[1])<12): ### For tf version < 0.12.0
+    init = tf.initialize_all_variables()
+else: ### For tf version >= 0.12.0
+    init = tf.global_variables_initializer()
+
 # saver = tf.train.Saver()
 # saver.restore(sess, "D:\Code\Python\model.ckpt")
 sess.run(init)
