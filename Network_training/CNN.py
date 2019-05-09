@@ -61,7 +61,10 @@ cross_entropy = -tf.reduce_sum(y_ * tf.log(y_conv))
 train_step = tf.train.AdagradOptimizer(1e-4).minimize(cross_entropy)
 correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
-sess.run(tf.global_variables_initializer())
+if(tf.__version__.startswith("0.") and int(tf.__version__.split(".")[1])<12): ### For tf version < 0.12.0
+    sess.run(tf.initialize_all_variables())
+else: ### For tf version >= 0.12.0
+    sess.run(tf.global_variables_initializer())
 for i in range(20000):
     batch = data.next_batch(50)
     if i % 100 == 0:
